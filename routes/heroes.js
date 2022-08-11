@@ -54,9 +54,20 @@ app.post('/', (req, res) => {
 })
 
 app.put('/:slug/powers', verifyHero, (req, res) => {
-  const power = req.body
-  superHeroes.put(power)
-  res.json(req.hero)
+  const { newPower } = req.body
+  const { power } = req.hero
+
+
+  const existingPower = power.find(item => {
+    return item === newPower
+  })
+
+  if (!existingPower) {
+    power.push(newPower)
+    res.json(power)
+  } else {
+    res.status(409).json("Power already exists")
+  }
 })
 
 
