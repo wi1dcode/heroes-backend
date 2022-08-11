@@ -12,6 +12,11 @@ app.get('/', (req, res) => {
 app.get('/:slug', verifyHero, (req, res) => {
     res.json(req.hero)
 })
+app.delete('/:slug', verifyHero, (req, res) => {
+    superHeroes.splice(req.heroIndex, 1)
+    res.send(`${req.hero.slug} effacé correctement`)
+    console.log(`${req.hero} effacé correctement`)
+})
 
 app.get('/:slug/powers', verifyHero, (req, res) => {
     res.json(req.hero.power)
@@ -49,10 +54,12 @@ app.post('/', (req, res) => {
 })
 
 app.put('/:slug/powers', verifyHero, (req, res) => {
-  res.json(req.hero.power)
+  const power = req.body
+  superHeroes.put(power)
+  res.json(req.hero)
 })
 
 
 
-
+  
 module.exports = app

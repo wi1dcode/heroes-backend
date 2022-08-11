@@ -13,9 +13,8 @@ const verifyHero = (req, res, next) => {
     req.heroIndex = heroIndex
     next()
   }
-
-
 }
+
 
 
 module.exports = {
